@@ -5,6 +5,7 @@ import 'dart:math';
 
 import 'package:staticweb/components/profileImage.dart';
 import 'package:staticweb/components/profile_tile.dart';
+import 'package:staticweb/components/widgets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,6 +36,17 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(child: Column()),
+    );
+  }
+}
+
 class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -43,12 +55,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        // Get Full screen size
-        height: MediaQuery.of(context).size.height,
-        width: double.infinity,
-        child: SingleChildScrollView(
+    return Scaffold(body: LayoutBuilder(
+      builder: ((context, constraints) {
+        return SingleChildScrollView(
           child: Column(
             children: [
               Stack(
@@ -60,146 +69,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           width: MediaQuery.of(context).size.width * 0.45,
                           color: Colors.white,
                           child: Stack(
-                            children: [
-                              Transform(
-                                transform: Matrix4.rotationZ(pi / 6)
-                                  ..translate(-180, 170),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey[300],
-                                      borderRadius: BorderRadius.circular(300)),
-                                  height: 350,
-                                  width: 700,
-                                ),
-                              ),
-                              Positioned(
-                                  top: 200,
-                                  left: 100,
-                                  child: Container(
-                                    height: 400,
-                                    width: 400,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Manage All Your',
-                                          style: TextStyle(
-                                              fontSize: 38,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                        Text(
-                                          'Projects in one plaxe',
-                                          style: TextStyle(
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          width: 300,
-                                          child: Text(
-                                            "Describe your project in a few words. This will be used to generate a project summary and a project description. You can edit this later.",
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w300),
-                                          ),
-                                        ),
-                                        SizedBox(height: 30),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              height: 45,
-                                              width: 230,
-                                              child: TextField(
-                                                decoration: InputDecoration(
-                                                  hintText:
-                                                      "Enter Your Email Address",
-                                                  hintStyle: TextStyle(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w300),
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(width: 20),
-                                            TextButton(
-                                                style: TextButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.black87,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                  ),
-                                                ),
-                                                onPressed: () {},
-                                                child: Container(
-                                                  height: 45,
-                                                  width: 100,
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Get Invite",
-                                                      style: TextStyle(
-                                                          fontSize: 13,
-                                                          color: Colors.white),
-                                                    ),
-                                                  ),
-                                                ))
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ))
-                            ],
+                            children: [greyPanel(), subsribeToNewsletter()],
                           )),
-                      Container(
-                        height: 600,
-                        color: Colors.white,
-                        width: MediaQuery.of(context).size.width * 0.55,
-                        child: Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            ProfileImage(
-                                top: 140,
-                                left: 90,
-                                diameter: 200,
-                                image:
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJrURzysGidjCA4aOFFAsZW6e5Weami4AUvg&usqp=CAU"),
-                            // ProfileImage(
-                            //     top: 160,
-                            //     left: 310,
-                            //     diameter: 100,
-                            //     image:
-                            //         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJrURzysGidjCA4aOFFAsZW6e5Weami4AUvg&usqp=CAU"),
-                            // ProfileImage(
-                            //     top: 275,
-                            //     left: 280,
-                            //     diameter: 280,
-                            //     image:
-                            //         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJrURzysGidjCA4aOFFAsZW6e5Weami4AUvg&usqp=CAU"),
-                            // ProfileImage(
-                            //     top: 300,
-                            //     left: 90,
-                            //     diameter: 170,
-                            //     image:
-                            //         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJrURzysGidjCA4aOFFAsZW6e5Weami4AUvg&usqp=CAU"),
-                            ProfileTile(
-                              top: 300,
-                              left: 50,
-                              title: "Lorem Ipsum Dorim",
-                              subTitle: "Scarllet,Designer",
-                              factor: 1,
-                            )
-                          ],
-                        ),
-                      )
+                      ourProjects(context)
                     ],
                   ),
                   Header(),
@@ -222,30 +94,32 @@ class _MyHomePageState extends State<MyHomePage> {
                         )),
                     Column(
                       children: [
-                        Text("How it works",
+                        Text("Why choose Real Builder",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w700)),
                         SizedBox(
                           height: 40,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        Wrap(
+                          spacing: 40,
+                          runAlignment: WrapAlignment.center,
+
+                          runSpacing: 50,
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             InfoCard(
-                              title: "Create Project",
-                              text: "Lorem Ipsum Diriem and bla bla bla",
-                              icon: Icons.people_rounded,
-                            ),
+                                title: "Delievery on Time",
+                                text: "Lorem Ipsum Diriem and bla bla bla",
+                                icon: Icons.access_time),
                             InfoCard(
-                              title: "Overview Reports",
+                              title: "Good Reputation",
                               text: "Lorem Ipsum Diriem and bla bla bla",
                               icon: Icons.pie_chart_outline_rounded,
                             ),
                             InfoCard(
-                              title: "Dashboard",
-                              text: "Lorem Ipsum Diriem and bla bla bla",
-                              icon: Icons.person_rounded,
-                            ),
+                                title: "Easy Installment",
+                                text: "Lorem Ipsum Diriem and bla bla bla",
+                                icon: Icons.money),
                           ],
                         ),
                         SizedBox(
@@ -297,11 +171,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                     height: 400,
                                     width: 700,
                                     decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            "https://www.alisaqlain.com/wp-content/uploads/2020/09/118730853_3028582763910472_575897864797854172_o.jpg"),
+                                        fit: BoxFit.cover,
+                                      ),
                                       color: Colors.red,
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    // child: Image.network(),
+                                    // child: Image.network(
+                                    //   "https://www.alisaqlain.com/wp-content/uploads/2020/09/118730853_3028582763910472_575897864797854172_o.jpg",
+                                    //   width: 650,
+                                    // ),
                                   )),
                               ProfileTile(
                                 left: 80,
@@ -324,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text("Easy Project Managenment",
+                                      Text("The Place To Be",
                                           style: TextStyle(
                                               fontSize: 25,
                                               fontWeight: FontWeight.w800)),
@@ -342,7 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       SizedBox(height: 20),
                                       TextButton(
                                         onPressed: () {},
-                                        child: Text("Try Now For Free",
+                                        child: Text("Visit Now",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w800,
@@ -361,9 +243,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 1000,
-                        )
                       ],
                     )
                   ],
@@ -371,8 +250,8 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ],
           ),
-        ),
-      ),
-    );
+        );
+      }),
+    ));
   }
 }

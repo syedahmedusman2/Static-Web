@@ -33,7 +33,7 @@ class ProfileTile extends StatelessWidget {
               radius: 12.0 * factor,
               backgroundColor: Colors.grey.shade800,
               child: Icon(
-                Icons.mail_outline_rounded,
+                Icons.home,
                 size: 12.0 * factor,
                 color: Colors.white,
               ),
